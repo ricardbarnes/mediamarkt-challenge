@@ -11,4 +11,8 @@ public abstract class StringVo {
         value = aValue;
     }
 
+    public String value() {
+        return value;
+    }
+
 }

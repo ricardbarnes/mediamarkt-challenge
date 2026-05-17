@@ -11,4 +11,8 @@ public abstract class Id {
         value = aValue;
     }
 
+    public Long value() {
+        return value;
+    }
+
 }
