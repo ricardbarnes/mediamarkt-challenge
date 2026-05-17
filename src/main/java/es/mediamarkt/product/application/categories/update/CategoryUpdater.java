@@ -17,7 +17,7 @@ public class CategoryUpdater {
 
     private final ForSavingCategories saving;
 
-    private Category update(
+    public Category update(
             CategoryId anId,
             CategoryName name,
             CatalogId catalogId
