@@ -34,9 +34,9 @@ public final class Category extends AggregateRoot {
 
     private final CategoryId id;
 
-    private final CategoryName name;
+    private CategoryName name;
 
-    private final CatalogId catalogId;
+    private CatalogId catalogId;
 
     private Category(
             CategoryId anId,
@@ -46,6 +46,14 @@ public final class Category extends AggregateRoot {
         id = anId;
         name = aName;
         catalogId = aCatalogId;
+    }
+
+    public void updateName(CategoryName newName) {
+        name = newName;
+    }
+
+    public void updateCatalogId(CatalogId newCatalogId) {
+        catalogId = newCatalogId;
     }
 
     public CategoryId id() {

@@ -15,7 +15,7 @@ public final class Product extends AggregateRoot {
             ProductOnlineStatus anOnlineStatus,
             ProductLongDescription aLongDescription,
             ProductShortDescription aShortDescription,
-            Set<CategoryId> aCategoryIds
+            Set<CategoryId> aCategoryIdSet
     ) {
         return new Product(
                 anId,
@@ -23,7 +23,7 @@ public final class Product extends AggregateRoot {
                 anOnlineStatus,
                 aLongDescription,
                 aShortDescription,
-                aCategoryIds
+                aCategoryIdSet
         );
     }
 
@@ -47,15 +47,15 @@ public final class Product extends AggregateRoot {
 
     private final ProductId id;
 
-    private final ProductName name;
+    private ProductName name;
 
-    private final ProductOnlineStatus onlineStatus;
+    private ProductOnlineStatus onlineStatus;
 
-    private final ProductLongDescription longDescription;
+    private ProductLongDescription longDescription;
 
-    private final ProductShortDescription shortDescription;
+    private ProductShortDescription shortDescription;
 
-    private final Set<CategoryId> categoryIds;
+    private Set<CategoryId> categoryIds;
 
     private Product(
             ProductId anId,
@@ -71,6 +71,26 @@ public final class Product extends AggregateRoot {
         longDescription = aLongDescription;
         shortDescription = aShortDescription;
         categoryIds = aCategoryIdSet;
+    }
+
+    public void updateName(ProductName newName) {
+        name = newName;
+    }
+
+    public void updateOnlineStatus(ProductOnlineStatus newOnlineStatus) {
+        onlineStatus = newOnlineStatus;
+    }
+
+    public void updateLongDescription(ProductLongDescription newLongDescription) {
+        longDescription = newLongDescription;
+    }
+
+    public void updateShortDescription(ProductShortDescription newShortDescription) {
+        shortDescription = newShortDescription;
+    }
+
+    public void updateCategoryIds(Set<CategoryId> newCategoryIds) {
+        categoryIds = newCategoryIds;
     }
 
     public ProductId id() {
