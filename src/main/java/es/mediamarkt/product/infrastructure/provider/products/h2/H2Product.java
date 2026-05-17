@@ -25,6 +25,7 @@ public class H2Product {
     @Column(name = "online_status")
     private ProductOnlineStatus onlineStatus;
 
+    @Lob
     @Column(name = "long_description")
     private String longDescription;
 

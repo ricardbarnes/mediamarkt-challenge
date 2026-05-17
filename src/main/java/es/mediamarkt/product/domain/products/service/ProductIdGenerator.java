@@ -1,7 +1,9 @@
 package es.mediamarkt.product.domain.products.service;
 
+import es.mediamarkt.product.domain.products.model.ProductId;
+
 public interface ProductIdGenerator {
 
-    Long generate();
+    ProductId generate();
 
 }

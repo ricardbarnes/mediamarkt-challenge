@@ -24,7 +24,7 @@ public class ProductCreator {
             ProductShortDescription aShortDescription,
             Set<CategoryId> aCategoryIds
     ) {
-        var id = ProductId.of(idGenerator.generate());
+        var id = idGenerator.generate();
         var aggregate = Product.create(id, aName, anOnlineStatus, aLongDescription, aShortDescription, aCategoryIds);
         saving.save(aggregate);
         return aggregate;
