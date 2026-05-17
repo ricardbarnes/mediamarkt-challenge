@@ -18,7 +18,7 @@ public class ProductFinder {
 
     private final ProductViewRepository viewRepository;
 
-    public PagedResult<Product> findAll(PageRequest pageRequest) {
+    public PagedResult<Product> findAllPaginated(PageRequest pageRequest) {
         return finding.findAllPaginated(pageRequest);
     }
 

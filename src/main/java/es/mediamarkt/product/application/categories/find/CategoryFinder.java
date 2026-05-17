@@ -14,7 +14,7 @@ public class CategoryFinder {
 
     private final ForFindingCategories finding;
 
-    public PagedResult<Category> findAll(PageRequest pageRequest) {
+    public PagedResult<Category> findAllPaginated(PageRequest pageRequest) {
         return finding.findAllPaginated(pageRequest);
     }
 
