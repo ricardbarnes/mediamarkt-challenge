@@ -1,0 +1,33 @@
+package es.mediamarkt.product.application.products.create;
+
+import es.mediamarkt.product.domain.products.model.*;
+import es.mediamarkt.product.domain.products.port.ForSavingProducts;
+import es.mediamarkt.product.domain.shared.categories.model.CategoryId;
+import es.mediamarkt.shared.domain.generator.IdGenerator;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.Set;
+
+@Service
+@RequiredArgsConstructor
+public class ProductCreator {
+
+    private final IdGenerator idGenerator;
+
+    private final ForSavingProducts saving;
+
+    public Product create(
+            ProductName aName,
+            ProductOnlineStatus anOnlineStatus,
+            ProductLongDescription aLongDescription,
+            ProductShortDescription aShortDescription,
+            Set<CategoryId> aCategoryIds
+    ) {
+        var id = ProductId.of(idGenerator.generate());
+        var aggregate = Product.create(id, aName, anOnlineStatus, aLongDescription, aShortDescription, aCategoryIds);
+        saving.save(aggregate);
+        return aggregate;
+    }
+
+}
