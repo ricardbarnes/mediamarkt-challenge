@@ -30,4 +30,8 @@ public class ProductFinder {
         return viewRepository.findFullyCategorizedById(value);
     }
 
+    public PagedResult<FullyCategorizedProduct> findAllFullyCategorizedPaginated(PageRequest pageRequest) {
+        return viewRepository.findFullyCategorizedPaginated(pageRequest);
+    }
+
 }
