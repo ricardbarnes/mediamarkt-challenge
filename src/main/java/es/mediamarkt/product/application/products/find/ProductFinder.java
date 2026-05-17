@@ -5,10 +5,10 @@ import es.mediamarkt.product.domain.products.model.ProductId;
 import es.mediamarkt.product.domain.products.port.ForFindingProducts;
 import es.mediamarkt.product.domain.products.port.ProductViewRepository;
 import es.mediamarkt.product.domain.products.view.FullyCategorizedProduct;
+import es.mediamarkt.shared.domain.pagination.PageRequest;
+import es.mediamarkt.shared.domain.pagination.PagedResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -18,8 +18,8 @@ public class ProductFinder {
 
     private final ProductViewRepository viewRepository;
 
-    public List<Product> findAll() { // TODO: paginate
-        return finding.findAll();
+    public PagedResult<Product> findAll(PageRequest pageRequest) {
+        return finding.findAllPaginated(pageRequest);
     }
 
     public Product findById(ProductId value) {
