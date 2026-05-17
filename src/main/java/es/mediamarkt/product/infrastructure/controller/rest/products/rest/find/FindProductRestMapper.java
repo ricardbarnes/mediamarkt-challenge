@@ -3,7 +3,7 @@ package es.mediamarkt.product.infrastructure.controller.rest.products.rest.find;
 import es.mediamarkt.product.domain.products.model.Product;
 import es.mediamarkt.product.domain.products.view.FullyCategorizedProduct;
 import es.mediamarkt.product.domain.shared.categories.model.CategoryId;
-import es.mediamarkt.shared.domain.pagination.PagedResult;
+import es.mediamarkt.shared.domain.pagination.Paginated;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
@@ -24,16 +24,16 @@ public final class FindProductRestMapper {
         );
     }
 
-    public FindAllProductsRestResponse toFindAllResponse(PagedResult<Product> pagedResult) {
-        var data = pagedResult.data().stream()
+    public FindAllProductsRestResponse toFindAllResponse(Paginated<Product> paginated) {
+        var data = paginated.data().stream()
                 .map(this::toListItemResponse)
                 .toList();
         return new FindAllProductsRestResponse(
                 data,
-                pagedResult.currentPage(),
-                pagedResult.pageSize(),
-                pagedResult.totalElements(),
-                pagedResult.totalPages()
+                paginated.currentPage(),
+                paginated.pageSize(),
+                paginated.totalElements(),
+                paginated.totalPages()
         );
     }
 
@@ -52,17 +52,17 @@ public final class FindProductRestMapper {
     }
 
     public FindAllFullyCategorizedProductsRestResponse toFindAllFullyCategorizedResponse(
-            PagedResult<FullyCategorizedProduct> pagedResult
+            Paginated<FullyCategorizedProduct> paginated
     ) {
-        var data = pagedResult.data().stream()
+        var data = paginated.data().stream()
                 .map(this::toFullyCategorizedListItemResponse)
                 .toList();
         return new FindAllFullyCategorizedProductsRestResponse(
                 data,
-                pagedResult.currentPage(),
-                pagedResult.pageSize(),
-                pagedResult.totalElements(),
-                pagedResult.totalPages()
+                paginated.currentPage(),
+                paginated.pageSize(),
+                paginated.totalElements(),
+                paginated.totalPages()
         );
     }
 

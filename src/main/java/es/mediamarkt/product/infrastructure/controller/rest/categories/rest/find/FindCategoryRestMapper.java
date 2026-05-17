@@ -1,7 +1,7 @@
 package es.mediamarkt.product.infrastructure.controller.rest.categories.rest.find;
 
 import es.mediamarkt.product.domain.categories.model.Category;
-import es.mediamarkt.shared.domain.pagination.PagedResult;
+import es.mediamarkt.shared.domain.pagination.Paginated;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -15,16 +15,16 @@ public final class FindCategoryRestMapper {
         );
     }
 
-    public FindAllCategoriesRestResponse toFindAllResponse(PagedResult<Category> pagedResult) {
-        var data = pagedResult.data().stream()
+    public FindAllCategoriesRestResponse toFindAllResponse(Paginated<Category> paginated) {
+        var data = paginated.data().stream()
                 .map(this::toListItemResponse)
                 .toList();
         return new FindAllCategoriesRestResponse(
                 data,
-                pagedResult.currentPage(),
-                pagedResult.pageSize(),
-                pagedResult.totalElements(),
-                pagedResult.totalPages()
+                paginated.currentPage(),
+                paginated.pageSize(),
+                paginated.totalElements(),
+                paginated.totalPages()
         );
     }
 

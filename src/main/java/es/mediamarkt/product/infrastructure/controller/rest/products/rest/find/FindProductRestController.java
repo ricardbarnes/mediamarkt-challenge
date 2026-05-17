@@ -25,9 +25,9 @@ public class FindProductRestController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size
     ) {
-        var pageRequest = new PageRequest(page, size);
+        var pageRequest = PageRequest.of(page, size);
         return switch (ProductRestView.fromQueryParam(view)) {
-            case DEFAULT -> mapper.toFindAllResponse(finder.findAll(pageRequest));
+            case DEFAULT -> mapper.toFindAllResponse(finder.findAllPaginated(pageRequest));
             case FULLY_CATEGORIZED -> mapper.toFindAllFullyCategorizedResponse(
                     finder.findAllFullyCategorizedPaginated(pageRequest)
             );

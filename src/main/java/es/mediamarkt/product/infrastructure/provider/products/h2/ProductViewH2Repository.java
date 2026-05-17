@@ -9,7 +9,7 @@ import es.mediamarkt.product.domain.shared.categories.model.CategoryId;
 import es.mediamarkt.product.infrastructure.provider.categories.h2.H2Category;
 import es.mediamarkt.product.infrastructure.provider.categories.h2.H2CategoryRepository;
 import es.mediamarkt.shared.domain.pagination.PageRequest;
-import es.mediamarkt.shared.domain.pagination.PagedResult;
+import es.mediamarkt.shared.domain.pagination.Paginated;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
@@ -30,7 +30,7 @@ public class ProductViewH2Repository implements ProductViewRepository {
     private final H2ProductMapper mapper;
 
     @Override
-    public PagedResult<FullyCategorizedProduct> findFullyCategorizedPaginated(PageRequest pageRequest) {
+    public Paginated<FullyCategorizedProduct> findFullyCategorizedPaginated(PageRequest pageRequest) {
         var pageable = Pageable.ofSize(pageRequest.size()).withPage(pageRequest.page());
         var page = productRepository.findAll(pageable);
         var products = page.getContent().stream()
@@ -40,7 +40,7 @@ public class ProductViewH2Repository implements ProductViewRepository {
         var data = products.stream()
                 .map(product -> mapper.toFullyCategorizedView(product, categories))
                 .toList();
-        return PagedResult.of(data, pageRequest, page.getTotalElements());
+        return Paginated.of(data, pageRequest, page.getTotalElements());
     }
 
     @Override

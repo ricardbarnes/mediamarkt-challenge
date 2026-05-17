@@ -24,8 +24,8 @@ public class FindCategoryRestController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size
     ) {
-        var pageRequest = new PageRequest(page, size);
-        return mapper.toFindAllResponse(finder.findAll(pageRequest));
+        var pageRequest = PageRequest.of(page, size);
+        return mapper.toFindAllResponse(finder.findAllPaginated(pageRequest));
     }
 
     @GetMapping("/{id}")

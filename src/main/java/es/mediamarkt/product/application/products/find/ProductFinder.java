@@ -6,7 +6,7 @@ import es.mediamarkt.product.domain.products.port.ForFindingProducts;
 import es.mediamarkt.product.domain.products.port.ProductViewRepository;
 import es.mediamarkt.product.domain.products.view.FullyCategorizedProduct;
 import es.mediamarkt.shared.domain.pagination.PageRequest;
-import es.mediamarkt.shared.domain.pagination.PagedResult;
+import es.mediamarkt.shared.domain.pagination.Paginated;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ public class ProductFinder {
 
     private final ProductViewRepository viewRepository;
 
-    public PagedResult<Product> findAllPaginated(PageRequest pageRequest) {
+    public Paginated<Product> findAllPaginated(PageRequest pageRequest) {
         return finding.findAllPaginated(pageRequest);
     }
 
@@ -30,7 +30,7 @@ public class ProductFinder {
         return viewRepository.findFullyCategorizedById(value);
     }
 
-    public PagedResult<FullyCategorizedProduct> findAllFullyCategorizedPaginated(PageRequest pageRequest) {
+    public Paginated<FullyCategorizedProduct> findAllFullyCategorizedPaginated(PageRequest pageRequest) {
         return viewRepository.findFullyCategorizedPaginated(pageRequest);
     }
 
