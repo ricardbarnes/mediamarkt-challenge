@@ -3,9 +3,9 @@ package es.mediamarkt.product.application.categories.create;
 import es.mediamarkt.product.domain.categories.model.Category;
 import es.mediamarkt.product.domain.categories.model.CategoryName;
 import es.mediamarkt.product.domain.categories.port.ForSavingCategories;
+import es.mediamarkt.product.domain.categories.service.CategoryIdGenerator;
 import es.mediamarkt.product.domain.shared.catalogs.model.CatalogId;
 import es.mediamarkt.product.domain.shared.categories.model.CategoryId;
-import es.mediamarkt.shared.domain.generator.IdGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CategoryCreator {
 
-    private final IdGenerator idGenerator;
+    private final CategoryIdGenerator idGenerator;
 
     private final ForSavingCategories saving;
 

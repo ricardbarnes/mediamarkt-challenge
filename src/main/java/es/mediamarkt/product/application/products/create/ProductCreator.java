@@ -2,8 +2,8 @@ package es.mediamarkt.product.application.products.create;
 
 import es.mediamarkt.product.domain.products.model.*;
 import es.mediamarkt.product.domain.products.port.ForSavingProducts;
+import es.mediamarkt.product.domain.products.service.ProductIdGenerator;
 import es.mediamarkt.product.domain.shared.categories.model.CategoryId;
-import es.mediamarkt.shared.domain.generator.IdGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class ProductCreator {
 
-    private final IdGenerator idGenerator;
+    private final ProductIdGenerator idGenerator;
 
     private final ForSavingProducts saving;
 
