@@ -50,4 +50,13 @@ public class RestExceptionHandler {
                 .body(new RestErrorResponse(error.getMessage()));
     }
 
+    @ExceptionHandler({
+            IllegalArgumentException.class,
+    })
+    public ResponseEntity<RestErrorResponse> handleIllegalArgumentException(IllegalArgumentException exception) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new RestErrorResponse(exception.getMessage()));
+    }
+
 }

@@ -33,7 +33,13 @@ public class H2Product {
     private String shortDescription;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "product_categories", joinColumns = @JoinColumn(name = "product_id"))
+    @CollectionTable(
+            name = "product_categories",
+            joinColumns = @JoinColumn(name = "product_id"),
+            uniqueConstraints = {
+                    @UniqueConstraint(name = "uk_product_category", columnNames = {"product_id", "category_id"})
+            }
+    )
     @Column(name = "category_id")
     private Set<Long> categoryIds = new HashSet<>();
 

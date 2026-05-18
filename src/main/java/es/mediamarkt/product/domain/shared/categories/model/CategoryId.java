@@ -4,11 +4,11 @@ import es.mediamarkt.shared.domain.valueobject.Id;
 
 public final class CategoryId extends Id {
 
-    public static CategoryId of(Long value) {
+    public static CategoryId of(long value) {
         return new CategoryId(value);
     }
 
-    private CategoryId(Long aValue) {
+    private CategoryId(long aValue) {
         super(aValue);
     }
 
