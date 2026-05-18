@@ -2,7 +2,9 @@ package es.mediamarkt.product.domain.categories.error;
 
 import es.mediamarkt.product.domain.shared.categories.model.CategoryId;
 import es.mediamarkt.shared.domain.error.Error;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = true)
 public final class CategoryNotFoundError extends Error {
 
     public static CategoryNotFoundError becauseOf(CategoryId value) {

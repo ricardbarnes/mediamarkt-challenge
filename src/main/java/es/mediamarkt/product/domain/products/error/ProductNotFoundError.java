@@ -2,7 +2,9 @@ package es.mediamarkt.product.domain.products.error;
 
 import es.mediamarkt.product.domain.products.model.ProductId;
 import es.mediamarkt.shared.domain.error.Error;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = true)
 public final class ProductNotFoundError extends Error {
 
     public static ProductNotFoundError becauseOf(ProductId value) {

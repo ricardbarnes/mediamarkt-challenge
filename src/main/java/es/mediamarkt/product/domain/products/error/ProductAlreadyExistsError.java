@@ -2,7 +2,9 @@ package es.mediamarkt.product.domain.products.error;
 
 import es.mediamarkt.product.domain.products.model.ProductName;
 import es.mediamarkt.shared.domain.error.Error;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = true)
 public final class ProductAlreadyExistsError extends Error {
 
     public static ProductAlreadyExistsError becauseOf(ProductName value) {
