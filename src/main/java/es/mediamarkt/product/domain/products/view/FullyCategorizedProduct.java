@@ -1,6 +1,6 @@
 package es.mediamarkt.product.domain.products.view;
 
-import java.util.List;
+import java.util.Map;
 
 public record FullyCategorizedProduct(
         Long id,
@@ -8,7 +8,6 @@ public record FullyCategorizedProduct(
         String onlineStatus,
         String longDescription,
         String shortDescription,
-        List<Long> categoryIds,
-        String categoryName
+        Map<Long, String> categories
 ) {
 }

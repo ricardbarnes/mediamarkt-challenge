@@ -46,26 +46,27 @@ public final class H2ProductMapper {
 
     public FullyCategorizedProduct toFullyCategorizedView(Product aggregate, List<H2Category> categories) {
         var categoryNameById = categories.stream()
-                .collect(Collectors.toMap(H2Category::getId, H2Category::getName));
-        var categoryIds = aggregate.categoryIds().stream()
-                .map(CategoryId::value)
-                .sorted()
-                .toList();
-        var categoryName = aggregate.categoryIds().stream()
-                .map(CategoryId::value)
-                .sorted()
-                .map(categoryNameById::get)
-                .filter(name -> name != null && !name.isBlank())
-                .collect(Collectors.joining(", "));
+                .collect(Collectors.toMap(
+                        H2Category::getId,
+                        H2Category::getName
+                ));
+
+        var categoriesMap = aggregate.categoryIds().stream()
+                .collect(Collectors.toMap(
+                        CategoryId::value,
+                        id -> {
+                            var name = categoryNameById.get(id.value());
+                            return (name == null || name.isBlank()) ? "" : name;
+                        }
+                ));
+
         return new FullyCategorizedProduct(
                 aggregate.id().value(),
                 aggregate.name().value(),
                 aggregate.onlineStatus().name(),
                 aggregate.longDescription().value(),
                 aggregate.shortDescription().value(),
-                categoryIds,
-                categoryName
+                categoriesMap
         );
     }
-
 }

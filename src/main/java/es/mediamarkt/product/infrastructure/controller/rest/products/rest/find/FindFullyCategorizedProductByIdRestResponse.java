@@ -1,6 +1,6 @@
 package es.mediamarkt.product.infrastructure.controller.rest.products.rest.find;
 
-import java.util.List;
+import java.util.Map;
 
 public record FindFullyCategorizedProductByIdRestResponse(
         Long id,
@@ -8,7 +8,6 @@ public record FindFullyCategorizedProductByIdRestResponse(
         String onlineStatus,
         String longDescription,
         String shortDescription,
-        List<Long> categoryIds,
-        String categoryName
+        Map<Long, String> categories
 ) {
 }

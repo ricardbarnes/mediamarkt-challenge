@@ -38,16 +38,15 @@ public final class FindProductRestMapper {
     }
 
     public FindFullyCategorizedProductByIdRestResponse toFindFullyCategorizedByIdResponse(
-            FullyCategorizedProduct product
+            FullyCategorizedProduct view
     ) {
         return new FindFullyCategorizedProductByIdRestResponse(
-                product.id(),
-                product.name(),
-                product.onlineStatus(),
-                product.longDescription(),
-                product.shortDescription(),
-                product.categoryIds(),
-                product.categoryName()
+                view.id(),
+                view.name(),
+                view.onlineStatus(),
+                view.longDescription(),
+                view.shortDescription(),
+                view.categories()
         );
     }
 
@@ -75,8 +74,7 @@ public final class FindProductRestMapper {
                 product.onlineStatus(),
                 product.longDescription(),
                 product.shortDescription(),
-                product.categoryIds(),
-                product.categoryName()
+                product.categories()
         );
     }
 
