@@ -9,8 +9,9 @@ public enum ProductRestView {
         if (view == null || view.isBlank()) {
             return DEFAULT;
         }
-        return switch (view) {
-            case "fully_categorized" -> FULLY_CATEGORIZED;
+        var normalized = view.toUpperCase();
+        return switch (normalized) {
+            case "FULLY_CATEGORIZED" -> FULLY_CATEGORIZED;
             default -> throw new IllegalArgumentException("Unknown view: " + view);
         };
     }

@@ -91,6 +91,21 @@ JDBC URL: jdbc:h2:mem:mediamarkt;DB_CLOSE_DELAY=-1
 User: sa
 Password: (empty)
 
+## 📚 API Documentation (Swagger UI)
+
+The API documentation is available via Swagger UI:
+
+👉 http://localhost:8080/swagger-ui/index.html
+
+This interface provides:
+
+Interactive exploration of all REST endpoints
+Request/response schemas
+Ability to execute requests directly from the browser
+OpenAPI specification generated from the application code
+
+Make sure the application is running before accessing the URL.
+
 ## 🧪 Testing Strategy
 Unit tests focus on the domain layer
 Application layer is tested via use-case orchestration tests
