@@ -1,8 +1,10 @@
 package es.mediamarkt.product.infrastructure.provider.categories.h2;
 
+import es.mediamarkt.product.domain.categories.error.CategoryAlreadyExistsError;
 import es.mediamarkt.product.domain.categories.model.Category;
 import es.mediamarkt.product.domain.categories.port.ForSavingCategories;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -15,7 +17,11 @@ public class ForSavingH2Categories implements ForSavingCategories {
 
     @Override
     public void save(Category aggregate) {
-        repository.save(mapper.toInfra(aggregate));
+        try {
+            repository.save(mapper.toInfra(aggregate));
+        } catch (DataIntegrityViolationException e) {
+            throw CategoryAlreadyExistsError.becauseOf(aggregate.name(), aggregate.catalogId());
+        }
     }
 
 }
