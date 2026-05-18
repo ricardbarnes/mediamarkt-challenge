@@ -1,8 +1,10 @@
 package es.mediamarkt.product.infrastructure.provider.products.h2;
 
+import es.mediamarkt.product.domain.products.error.ProductAlreadyExistsError;
 import es.mediamarkt.product.domain.products.model.Product;
 import es.mediamarkt.product.domain.products.port.ForSavingProducts;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -15,7 +17,11 @@ public class ForSavingH2Products implements ForSavingProducts {
 
     @Override
     public void save(Product aggregate) {
-        repository.save(mapper.toInfra(aggregate));
+        try {
+            repository.save(mapper.toInfra(aggregate));
+        } catch (DataIntegrityViolationException e) {
+            throw ProductAlreadyExistsError.becauseOf(aggregate.name());
+        }
     }
 
 }

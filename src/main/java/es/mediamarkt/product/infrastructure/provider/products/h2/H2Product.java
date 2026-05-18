@@ -2,7 +2,10 @@ package es.mediamarkt.product.infrastructure.provider.products.h2;
 
 import es.mediamarkt.product.domain.products.model.ProductOnlineStatus;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,9 +19,10 @@ import java.util.Set;
 public class H2Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "product_id")
     private Long id;
 
+    @Column(nullable = false, unique = true)
     private String name;
 
     @Enumerated(EnumType.STRING)
@@ -34,11 +38,8 @@ public class H2Product {
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(
-            name = "product_categories",
-            joinColumns = @JoinColumn(name = "product_id"),
-            uniqueConstraints = {
-                    @UniqueConstraint(name = "uk_product_category", columnNames = {"product_id", "category_id"})
-            }
+            name = "product_category_ids",
+            joinColumns = @JoinColumn(name = "product_id")
     )
     @Column(name = "category_id")
     private Set<Long> categoryIds = new HashSet<>();

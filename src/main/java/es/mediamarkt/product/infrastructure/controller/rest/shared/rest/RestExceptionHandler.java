@@ -2,6 +2,7 @@ package es.mediamarkt.product.infrastructure.controller.rest.shared.rest;
 
 import es.mediamarkt.product.domain.categories.error.CategoryAlreadyExistsError;
 import es.mediamarkt.product.domain.categories.error.CategoryNotFoundError;
+import es.mediamarkt.product.domain.products.error.ProductAlreadyExistsError;
 import es.mediamarkt.product.domain.products.error.ProductNotFoundError;
 import es.mediamarkt.product.infrastructure.controller.rest.categories.rest.create.CreateCategoryRestController;
 import es.mediamarkt.product.infrastructure.controller.rest.categories.rest.delete.DeleteCategoryRestController;
@@ -43,6 +44,7 @@ public class RestExceptionHandler {
     @SuppressWarnings("unused")
     @ExceptionHandler({
             CategoryAlreadyExistsError.class,
+            ProductAlreadyExistsError.class
     })
     public ResponseEntity<RestErrorResponse> handleAlreadyExistsError(Error error) {
         return ResponseEntity

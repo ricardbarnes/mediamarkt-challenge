@@ -80,73 +80,87 @@ public class MockedDataLoader {
 
     private void loadProducts() {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("products/xlsx/tv_and_audio_products.xlsx")) {
+
             if (is == null) {
-                throw new IllegalStateException("Resource tv_and_audio_products.xlsx not found in resources folder");
+                throw new IllegalStateException(
+                        "Resource tv_and_audio_products.xlsx not found in resources folder"
+                );
             }
 
             try (Workbook workbook = new XSSFWorkbook(is)) {
+
                 Sheet sheet = workbook.getSheetAt(0);
                 Iterator<Row> rowIterator = sheet.iterator();
 
+                // Skip header
                 if (rowIterator.hasNext()) {
                     rowIterator.next();
                 }
 
-                String productSql = "INSERT INTO products (id, name, online_status, long_description, short_description) VALUES (?, ?, ?, ?, ?)";
-                String relationshipSql = "INSERT INTO products_categories (product_id, categories_id) VALUES (?, ?)";
+                String productSql = """
+                        INSERT INTO products (
+                            product_id,
+                            name,
+                            online_status,
+                            long_description,
+                            short_description
+                        ) VALUES (?, ?, ?, ?, ?)
+                        """;
+
+                String relationshipSql = """
+                        INSERT INTO product_category_ids (
+                            product_id,
+                            category_id
+                        ) VALUES (?, ?)
+                        """;
 
                 while (rowIterator.hasNext()) {
+
                     Row row = rowIterator.next();
 
-                    Cell nameCell = row.getCell(0);
-                    Cell categoriesCell = row.getCell(1);
-                    Cell statusCell = row.getCell(2);
-                    Cell longDescCell = row.getCell(3);
-                    Cell shortDescCell = row.getCell(4);
+                    String productName = getCellValueAsString(row.getCell(0));
 
-                    String productNameText = getCellValueAsString(nameCell);
-                    if (productNameText.isEmpty()) {
+                    if (productName.isBlank()) {
                         continue;
                     }
 
-                    String categoriesRaw = getCellValueAsString(categoriesCell);
-                    String statusRaw = getCellValueAsString(statusCell);
-                    String longDescRaw = getCellValueAsString(longDescCell);
-                    String shortDescRaw = getCellValueAsString(shortDescCell);
+                    String categoriesRaw = getCellValueAsString(row.getCell(1));
+                    String statusRaw = getCellValueAsString(row.getCell(2));
+                    String longDescription = getCellValueAsString(row.getCell(3));
+                    String shortDescription = getCellValueAsString(row.getCell(4));
 
-                    // Parse category string sequence
                     Set<Long> categoryIds = Arrays.stream(categoriesRaw.split(";"))
                             .map(String::trim)
-                            .filter(s -> !s.isEmpty())
+                            .filter(s -> !s.isBlank())
                             .map(Long::parseLong)
                             .collect(Collectors.toSet());
 
-                    // Domain ID generation via injected service port
-                    long generatedProductId = productIdGenerator.generate().value();
+                    long productId = productIdGenerator.generate().value();
 
-                    // 1. Insert product base
-                    jdbcTemplate.update(productSql,
-                            generatedProductId,
-                            productNameText,
-                            statusRaw,
-                            longDescRaw,
-                            shortDescRaw
+                    jdbcTemplate.update(
+                            productSql,
+                            productId,
+                            productName,
+                            ProductOnlineStatus.valueOf(statusRaw).name(),
+                            longDescription,
+                            shortDescription
                     );
 
-                    // 2. Insert joint category relations via direct native mapping loop
                     for (Long categoryId : categoryIds) {
-                        try {
-                            jdbcTemplate.update(relationshipSql, generatedProductId, categoryId);
-                        } catch (org.springframework.jdbc.BadSqlGrammarException ex) {
-                            // Secondary fallback catch block in case your ManyToMany mapping is singularized ('product_categories' instead of 'products_categories')
-                            String fallbackSql = "INSERT INTO product_categories (product_id, category_id) VALUES (?, ?)";
-                            jdbcTemplate.update(fallbackSql, generatedProductId, categoryId);
-                        }
+                        jdbcTemplate.update(
+                                relationshipSql,
+                                productId,
+                                categoryId
+                        );
                     }
                 }
             }
+
         } catch (Exception e) {
-            throw new RuntimeException("Failed to load and save products inside MockedDataLoader", e);
+            throw new RuntimeException(
+                    "Failed to load and save products inside MockedDataLoader",
+                    e
+            );
         }
     }
 
