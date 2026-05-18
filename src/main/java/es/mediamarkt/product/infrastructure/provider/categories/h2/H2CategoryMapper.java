@@ -18,11 +18,11 @@ public final class H2CategoryMapper {
     }
 
     public H2Category toInfra(Category category) {
-        return new H2Category(
-                category.id().value(),
-                category.name().value(),
-                category.catalogId().value()
-        );
+        return H2Category.builder()
+                .withId(category.id().value())
+                .withName(category.name().value())
+                .withCatalogId(category.catalogId().value())
+                .build();
     }
 
 }

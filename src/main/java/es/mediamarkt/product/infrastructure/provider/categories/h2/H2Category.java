@@ -4,7 +4,12 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "categories")
+@Table(
+        name = "categories",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "uk_category_name_per_catalog", columnNames = {"name", "catalog_id"})
+        }
+)
 @Data
 @Builder(setterPrefix = "with")
 @NoArgsConstructor
@@ -12,7 +17,6 @@ import lombok.*;
 public class H2Category {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
