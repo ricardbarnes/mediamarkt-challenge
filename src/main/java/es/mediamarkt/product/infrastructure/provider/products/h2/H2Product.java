@@ -42,6 +42,7 @@ public class H2Product {
             joinColumns = @JoinColumn(name = "product_id")
     )
     @Column(name = "category_id")
+    @Builder.Default
     private Set<Long> categoryIds = new HashSet<>();
 
 }
