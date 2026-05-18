@@ -18,16 +18,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@RestControllerAdvice(assignableTypes = {
-        CreateCategoryRestController.class,
-        FindCategoryRestController.class,
-        UpdateCategoryRestController.class,
-        DeleteCategoryRestController.class,
-        CreateProductRestController.class,
-        FindProductRestController.class,
-        UpdateProductRestController.class,
-        DeleteProductRestController.class
-})
+@RestControllerAdvice(
+        assignableTypes = {
+                CreateCategoryRestController.class,
+                FindCategoryRestController.class,
+                UpdateCategoryRestController.class,
+                DeleteCategoryRestController.class,
+                CreateProductRestController.class,
+                FindProductRestController.class,
+                UpdateProductRestController.class,
+                DeleteProductRestController.class
+        }
+)
 public class RestExceptionHandler {
 
     @SuppressWarnings("unused")
