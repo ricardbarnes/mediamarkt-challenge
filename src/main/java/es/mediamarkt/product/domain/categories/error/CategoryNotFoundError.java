@@ -9,8 +9,8 @@ public final class CategoryNotFoundError extends Error {
         return new CategoryNotFoundError(aMessageFor(value));
     }
 
-    private static String aMessageFor(CategoryId value) {
-        return "Category ID %s not found.".formatted(value);
+    private static String aMessageFor(CategoryId id) {
+        return "Category ID %s not found.".formatted(id.value());
     }
 
     private CategoryNotFoundError(String message) {
