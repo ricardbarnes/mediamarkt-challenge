@@ -9,8 +9,8 @@ public final class ProductNotFoundError extends Error {
         return new ProductNotFoundError(aMessageFor(value));
     }
 
-    private static String aMessageFor(ProductId value) {
-        return "Product ID %s not found.".formatted(value);
+    private static String aMessageFor(ProductId id) {
+        return "Product ID %s not found.".formatted(id.value());
     }
 
     private ProductNotFoundError(String message) {
