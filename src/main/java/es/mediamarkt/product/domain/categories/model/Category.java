@@ -5,7 +5,7 @@ import es.mediamarkt.product.domain.shared.categories.model.CategoryId;
 import es.mediamarkt.shared.domain.aggregate.AggregateRoot;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 public final class Category extends AggregateRoot {
 
     public static Category create(
