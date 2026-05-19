@@ -1,6 +1,6 @@
 package es.mediamarkt.product.application.categories.find;
 
-import es.mediamarkt.product.application.IT;
+import es.mediamarkt.product.application.categories.CategoryIT;
 import es.mediamarkt.product.domain.categories.error.CategoryNotFoundError;
 import es.mediamarkt.product.domain.categories.model.CategoryMother;
 import es.mediamarkt.product.infrastructure.provider.categories.h2.H2Category;
@@ -10,7 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-class CategoryFinderIT extends IT {
+class CategoryFinderIT extends CategoryIT {
 
     @Autowired
     private CategoryFinder sut;
@@ -64,7 +64,7 @@ class CategoryFinderIT extends IT {
     }
 
     @Test
-    @DisplayName("it should fail when category doesn't exist in H2 database")
+    @DisplayName("it should fail when category doesn't exist")
     void findById_shouldFail_whenIdDoesNotExist() {
         // given
         var id = CategoryMother.create(null, null, null).id();

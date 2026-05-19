@@ -1,6 +1,6 @@
 package es.mediamarkt.product.application.categories.create;
 
-import es.mediamarkt.product.application.IT;
+import es.mediamarkt.product.application.categories.CategoryIT;
 import es.mediamarkt.product.domain.categories.error.CategoryAlreadyExistsError;
 import es.mediamarkt.product.domain.categories.model.CategoryNameMother;
 import es.mediamarkt.product.domain.shared.catalogs.model.CatalogIdMother;
@@ -9,13 +9,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-class CategoryCreatorIT extends IT {
+class CategoryCreatorIT extends CategoryIT {
 
     @Autowired
     private CategoryCreator sut;
 
     @Test
-    @DisplayName("it should create a category in H2 database")
+    @DisplayName("it should create a category")
     void create_shouldCreate() {
         // given
         var name = CategoryNameMother.of(null);
@@ -37,7 +37,7 @@ class CategoryCreatorIT extends IT {
     }
 
     @Test
-    @DisplayName("it should fail when category already exists in the same catalog using H2 database")
+    @DisplayName("it should fail when category already exists in the same catalog")
     void create_shouldFail_whenCategoryAlreadyExists() {
         // given
         var name = CategoryNameMother.of(null);

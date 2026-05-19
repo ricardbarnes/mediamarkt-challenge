@@ -1,6 +1,6 @@
 package es.mediamarkt.product.application.categories.update;
 
-import es.mediamarkt.product.application.IT;
+import es.mediamarkt.product.application.categories.CategoryIT;
 import es.mediamarkt.product.domain.categories.error.CategoryNotFoundError;
 import es.mediamarkt.product.domain.categories.model.CategoryMother;
 import es.mediamarkt.product.domain.categories.model.CategoryName;
@@ -11,7 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-class CategoryUpdaterIT extends IT {
+class CategoryUpdaterIT extends CategoryIT {
 
     @Autowired
     private CategoryUpdater sut;

@@ -1,6 +1,6 @@
 package es.mediamarkt.product.application.categories.delete;
 
-import es.mediamarkt.product.application.IT;
+import es.mediamarkt.product.application.categories.CategoryIT;
 import es.mediamarkt.product.domain.categories.model.CategoryIdMother;
 import es.mediamarkt.product.infrastructure.provider.categories.h2.H2Category;
 import org.assertj.core.api.Assertions;
@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-class CategoryDeleterIT extends IT {
+class CategoryDeleterIT extends CategoryIT {
 
     @Autowired
     private CategoryDeleter sut;
